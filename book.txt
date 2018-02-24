@@ -1,0 +1,9 @@
+创建第一个项目
+django-admin.py startproject blog
+开启服务
+python manage.py runserver
+
+python manage.py migrate   #创建表结构
+
+python manage.py makemigrations model  # 让 Django 知道我们在我们的模型有一些变更
+python manage.py migrate model   # 创建表结构

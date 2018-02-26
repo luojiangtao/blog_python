@@ -18,11 +18,14 @@ from django.urls import path
 from django.conf.urls import url
 
 from .controller.index import index
+from .controller.index import article
 from .controller.admin import login
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    url(r'^$', index.index),
-    url(r'^\d+$', index.detail),
-    url(r'^admin/login$', login.index),
+    path('admin/', admin.site.urls,name='admin'),
+    url(r'^admin/login$', login.index,name='login'),
+
+    url(r'^$', index.index,name='index'),
+    url(r'^detail$', article.detail,name='detail'),
+    url(r'^list$', article.list,name='list'),
 ]

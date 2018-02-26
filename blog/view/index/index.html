@@ -10,6 +10,16 @@
     <title>Document</title>
 </head>
 <body>
-<h1>{{ hello }}</h1>
+      {% for category in category_list %}
+          <p><a href="{% url 'list' %}?id={{ category.id }}">{{ category.category_name }}</a></p>
+      {% endfor %}
+      <hr>
+      {% for article in article_list %}
+          <p><a href="{% url 'list' %}?id={{ article.id }}">{{ article.title }}</a></p>
+          <p>{{ article.summary }}</p>
+          <p>{{ article.image }}</p>
+          <p>{{ article.summary }}</p>
+          <p>{{ article.click_number }}</p>
+      {% endfor %}
 </body>
 </html>

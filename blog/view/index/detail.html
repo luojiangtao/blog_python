@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
+    {% load static %}
+    <link rel="stylesheet" href="/static/index/index.css">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -8,6 +10,14 @@
     <title>Document</title>
 </head>
 <body>
-detail
+{% include "index/nav.html" %}
+      <hr>
+      <p>{{ article.title }}</p>
+      <p>{{ article.category_name }}</p>
+      <p>{{ article.summary }}</p>
+      <p>{{ article.image }}</p>
+      <p>{{ article.summary }}</p>
+      <p>{{ article.click_number }}</p>
+      <p>{{ article.content }}</p>
 </body>
 </html>

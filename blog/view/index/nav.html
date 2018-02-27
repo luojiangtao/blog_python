@@ -1,0 +1,4 @@
+<a href="{% url 'index' %}">首页</a>
+      {% for category in category_list %}
+          <p><a href="{% url 'list' %}?id={{ category.id }}">{{ category.category_name }}</a></p>
+      {% endfor %}

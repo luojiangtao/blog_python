@@ -2,8 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from blog.model.models import Category
 from blog.model.models import Article
-from pprint import pprint
-from django.db import connection
+from blog import tool
 
 def index(request):
     # category_list = Category.objects.all()
@@ -13,31 +12,26 @@ def index(request):
     # pprint(article_list.ca)
     # return render(request, 'index/index.html', locals())
 
-    cursor = connection.cursor()
-
     # Data retrieval operation. This doesn't dirty the transaction,
     # so no call to set_dirty() is required.
 
-    cursor.execute("SELECT * FROM python_category")
-    category_list = dictfetchall(cursor)
+    article_list=tool.executeQuery("SELECT * FROM python_article")
+    category_list=tool.executeQuery("SELECT * FROM python_category")
+    for key,value in enumerate(article_list):
+        # print(key,value)
+        sql=f"SELECT category_name FROM python_category where id={value['category_id']}"
+        category = tool.executeQuery(sql)
+        # print(category)
+        article_list[key]["category_name"] = category[0]['category_name']
+    # for k,v in category_list.items():
+    #     print(k,v['category_name'])
+    # print('category_list',category_list)
+    print('article_list',article_list)
 
-    cursor.execute("SELECT * FROM python_article")
-    article_list = dictfetchall(cursor)
-    # print(article_list)
-    # for key,value in article_list.items():
+    # for key,value in category_list.items():
     #     print(key,value)
 
     # category_list = cursor.fetchall()
     # category_list = list(category_list)
     # print(article_list)
     return render(request, 'index/index.html', locals())
-
-def dictfetchall(cursor):
-    "将游标返回的结果保存到一个字典对象中"
-    desc = cursor.description
-    print(desc)
-    retult =  [
-        dict(zip([col[0] for col in desc], row))
-        for row in cursor.fetchall()
-    ]
-    return retult

@@ -10,12 +10,11 @@
     <title>Document</title>
 </head>
 <body>
-      {% for category in category_list %}
-          <p><a href="{% url 'list' %}?id={{ category.id }}">{{ category.category_name }}</a></p>
-      {% endfor %}
+        {% include "index/nav.html" %}
       <hr>
       {% for article in article_list %}
-          <p><a href="{% url 'list' %}?id={{ article.id }}">{{ article.title }}</a></p>
+          <p><a href="{% url 'detail' %}?id={{ article.id }}">{{ article.title }}</a></p>
+          <p>{{ article.category_name }}</p>
           <p>{{ article.summary }}</p>
           <p>{{ article.image }}</p>
           <p>{{ article.summary }}</p>
